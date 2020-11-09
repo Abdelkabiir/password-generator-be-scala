@@ -16,7 +16,7 @@ object Password extends App {
   }
 
   def generateOptionsSet(options: PasswordOptions) = {
-    List()++
+    List() ++
       Constants.optionsValues.Numbers ++
       Constants.optionsValues.LowerCaseLetters ++
       Constants.optionsValues.UpperCaseLetters ++

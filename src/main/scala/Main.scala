@@ -20,19 +20,19 @@ object Main extends App {
 
   val corsHeader = RawHeader("Access-Control-Allow-Origin", "*")
   val requestHandler: HttpRequest => HttpResponse = {
-    case HttpRequest(POST, Uri.Path("/session"), _, _ , _) =>
+    case HttpRequest(POST, Uri.Path("/session"), _, _, _) =>
       val res = HttpResponse(200).withHeaders(corsHeader)
       println(res)
       res
-    case HttpRequest(POST, Uri.Path("/password"), _, _ , _) =>
+    case HttpRequest(POST, Uri.Path("/password"), _, _, _) =>
       HttpResponse(entity = HttpEntity("Ok"))
     case _ => HttpResponse(404, entity = "You requested a wrong route")
   }
 
   val bindingFuture: Future[Http.ServerBinding] =
-    serverSource.to(Sink.foreach { connection  =>
+    serverSource.to(Sink.foreach { connection =>
       println("New connection from " + connection.remoteAddress)
-      connection handleWithSyncHandler(requestHandler)
+      connection handleWithSyncHandler (requestHandler)
     }).run()
 
   println("server running at : http://localhost:3002")
