@@ -23,6 +23,8 @@ object UserController {
 }
 
 trait UserController extends UserService{
+
+  import users.UserController.UserJsonProtocol._
   implicit def actorSystem: ActorSystem
 
   lazy val logger = Logging(actorSystem, classOf[UserController])
