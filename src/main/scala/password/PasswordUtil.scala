@@ -1,9 +1,14 @@
-package utils
+package password
 
-import constants.Constants
-import model.PasswordOptions
+object PasswordUtil {
 
-object Password extends App {
+  val numbers = (1 to 9)
+  val lowerCaseLetters = ('a' to 'z')
+  val upperCaseLetters = ('A' to 'Z')
+  val nonAlphaAsciiSymbols = ('!' to '/') ++:
+    (':' to '@') ++:
+    ('[' to '`') ++:
+    ('{' to '~')
 
   def generatePassword(passwordOptions: PasswordOptions): String = {
     var result: String = ""
@@ -16,20 +21,10 @@ object Password extends App {
   }
 
   def generateOptionsSet(options: PasswordOptions) = {
-    List() ++
-      Constants.optionsValues.Numbers ++
-      Constants.optionsValues.LowerCaseLetters ++
-      Constants.optionsValues.UpperCaseLetters ++
-      Constants.optionsValues.NonAlphaAsciiSymbols
+    List() ++ numbers ++ lowerCaseLetters ++ upperCaseLetters ++ nonAlphaAsciiSymbols
   }
 
   def generateRandomNumber(n: Int): Int = {
     Math.floor(Math.random() * n).toInt
   }
-
-  /*
-    val password = generatePassword(PasswordOptions(length = 9))
-    println(password)
-  */
-
 }
